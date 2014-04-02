@@ -173,4 +173,20 @@ class Utilisateur extends User {
 	public function getInscriptions() {
 		return $this->inscriptions;
 	}
+
+	/**
+	 * Verifie si l'utilisateur est un formateur
+	 * @return boolean
+	 */
+	public function estFormateur() {
+		return in_array('ROLE_FORMATEUR', $this->getRoles());
+	}
+
+	/**
+	 * Verifie si l'utilisateur est un administrateur
+	 * @return boolean
+	 */
+	public function estAdministrateur() {
+		return in_array('ROLE_ADMIN', $this->getRoles());
+	}
 }

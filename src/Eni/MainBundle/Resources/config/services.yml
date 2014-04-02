@@ -1,5 +1,14 @@
 services:
-    controller.pre_execute_listener:
+    eni.main_bundle.controller_pre_execute_listener:
         class: Eni\MainBundle\Listener\ControllerListener
         tags:
             -  { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
+
+    eni.main_bundle.login_listener:
+        class: Eni\MainBundle\Listener\LoginListener
+        arguments:
+            - @security.context
+            - @router
+            - @event_dispatcher
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }

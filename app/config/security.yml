@@ -3,8 +3,9 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_FORMATEUR:     ROLE_USER
+        ROLE_ADMIN:         [ROLE_USER, ROLE_FORMATEUR]
+        ROLE_SUPER_ADMIN:   [ROLE_USER, ROLE_FORMATEUR, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         fos_userbundle:
@@ -15,17 +16,27 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        login_firewall:
+            pattern:    ^/connexion$
+            anonymous:  true
+
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
-                csrf_provider: form.csrf_provider
-            logout:       true
-            anonymous:    false
-
-        login_firewall:
-            pattern:   ^/connexion
-            anonymous: true
+                provider:                       fos_userbundle
+                csrf_provider:                  form.csrf_provider
+                login_path:                     /connexion
+                check_path:                     /verifie_login
+                remember_me:                    true
+            remember_me:
+                key:        %secret%
+                lifetime:   3600
+                path:       /
+                domain:     ~
+            logout:
+                path:   /deconnexion
+                target: /connexion
+            anonymous:  false
 
     access_control:
         - { path: ^/connexion$, role: IS_AUTHENTICATED_ANONYMOUSLY }
