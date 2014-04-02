@@ -56,6 +56,7 @@ class Utilisateur extends User {
 	 * Constructor
 	 */
 	public function __construct() {
+		parent::__construct();
 		$this->tests = new ArrayCollection();
 		$this->inscriptions = new ArrayCollection();
 	}
