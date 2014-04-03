@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 {% spaceless %}
-<html>
-    <head>
-        <meta charset="utf-8">
-        
-        <title>{% block title %}QCM ENI{% endblock %}</title>
+    <html>
+        <head>
+            <meta charset="utf-8">
 
-        {% block css %}
-        <link href="{{ asset('bootstrap/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('css/main.css') }}" media="all" rel="stylesheet" type="text/css" />
-        {% endblock %}
+            <title>{% block title %}QCM ENI{% endblock %}</title>
 
-        {% block js %}
-        <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
-        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-        <div id="banniere">
-            {% block banniere %}{% endblock %}
-        </div>
-        <div id="contenu">
-            {% block contenu %}{% endblock %}
-        </div>
-        <div id="footer">
+            {% block css %}
+                <link href="{{ asset('bootstrap/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css" />
+                <link href="{{ asset('css/main.css') }}" media="all" rel="stylesheet" type="text/css" />
+            {% endblock %}
+
+            {% block js %}
+                <script src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
+                <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+                <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+                <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            {% endblock %}
+        </head>
+        <body>
+            {% block body %}
+                <div id="banniere">
+                    {% block banniere %}
+                        <div class="col-md-2">
+                            <img src="{{ asset('images/logoENI.jpg') }}" alt="logo ENI" width="100" height="100"/>
+                        </div>
+                        <div class="col-md-10" id="titreBanniere">
+                            <h1> Eni QCM </h1>
+                        </div>
+                    {% endblock %}
+                </div>
+                <div id="contenu">
+                {% block contenu %}{% endblock %}
+            </div>
+            <div id="footer">
             {% block footer %}{% endblock %}
         </div>
-        {% endblock %}
-    </body>
+    {% endblock %}
+</body>
 </html>
 {% endspaceless %}
