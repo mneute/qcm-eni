@@ -33,6 +33,7 @@ class AccueilController extends Controller {
 	/**
 	 * @Route("/")
 	 * @Route("/stagiaire", name="accueil-stagiaire")
+	 * @Template
 	 */
 	public function accueilStagiaireAction() {
 		return [];

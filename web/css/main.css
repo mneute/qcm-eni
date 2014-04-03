@@ -1,8 +1,13 @@
 body {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #eee;
+    padding: 0;
 }
+#body {
+    width: 1100px;
+    margin: 0 auto;
+    border: black thin solid;
+    box-shadow: grey 0px 0px 5px;
+}
+
 .form-signin {
     max-width: 330px;
     padding: 15px;
