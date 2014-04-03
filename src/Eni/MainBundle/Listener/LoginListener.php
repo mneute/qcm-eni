@@ -45,10 +45,9 @@ class LoginListener {
 
 		if ($oUtilisateurConnecte->estFormateur() || $oUtilisateurConnecte->estAdministrateur()) {
 			$oResponse = new RedirectResponse($this->oRouter->generate('accueil-formateur'));
-			$oResponseEvent->setResponse($oResponse);
 		} else {
 			$oResponse = new RedirectResponse($this->oRouter->generate('accueil-stagiaire'));
-			$oResponseEvent->setResponse($oResponse);
 		}
+		$oResponseEvent->setResponse($oResponse);
 	}
 }
