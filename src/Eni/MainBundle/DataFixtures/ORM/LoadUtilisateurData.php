@@ -36,7 +36,8 @@ class LoadUtilisateurData implements FixtureInterface, ContainerAwareInterface {
 				->setPlainPassword('admin')
 				->setNom('admin')
 				->setPrenom('admin')
-				->addRole('ROLE_ADMIN');
+				->addRole('ROLE_ADMIN')
+				->setEnabled(true);
 		$oUserManager->updateUser($oUtilisateur);
 
 		/**
@@ -49,7 +50,8 @@ class LoadUtilisateurData implements FixtureInterface, ContainerAwareInterface {
 				->setPlainPassword('trichard')
 				->setNom('richard')
 				->setPrenom('thierry')
-				->addRole('ROLE_FORMATEUR');
+				->addRole('ROLE_FORMATEUR')
+				->setEnabled(true);
 		$oUserManager->updateUser($oUtilisateur);
 
 		/**
@@ -61,7 +63,8 @@ class LoadUtilisateurData implements FixtureInterface, ContainerAwareInterface {
 				->setEmail('jdupond@email.fr')
 				->setPlainPassword('jdupond')
 				->setNom('dupond')
-				->setPrenom('Jean');
+				->setPrenom('Jean')
+				->setEnabled(true);
 		$oUserManager->updateUser($oUtilisateur);
 
 		$oPromotion = new Promotion();
@@ -76,7 +79,8 @@ class LoadUtilisateurData implements FixtureInterface, ContainerAwareInterface {
 				->setEmail('toto@email.fr')
 				->setPlainPassword('toto')
 				->setNom('to')
-				->setPrenom('to');
+				->setPrenom('to')
+				->setEnabled(true);
 		$oUtilisateur->setPromotion($oPromotion);
 		$oPromotion->addUtilisateur($oUtilisateur);
 
