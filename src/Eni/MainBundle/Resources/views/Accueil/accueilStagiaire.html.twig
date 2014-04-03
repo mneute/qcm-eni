@@ -1,1 +1,9 @@
 {% extends "MainBundle:Layout:layout.html.twig" %}
+
+{% block roleUtilisateur %}
+    {% if app.user.promotion %}
+        {{ app.user.promotion.libelle }}
+    {% else %}
+        Candidat libre
+    {% endif %}
+{% endblock %}

@@ -19,10 +19,26 @@
             {% endblock %}
         </head>
         <body>
-            <div id="body">
+            <div id="body" class="container">
                 {% block body %}
                     <div id="banniere">
                         {% block banniere %}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="{{ asset('images/logoENI.jpg') }}" alt="logo ENI" width="100" height="100"/>
+                                </div>
+                                <div class="col-md-10" id="titreBanniere">
+                                    <h1> Eni QCM </h1>
+                                </div>
+                            </div>
+                            <div class="row" id="bannierePerso">
+                                <div class="col-md-12">
+                                    <div class="alert alert-success">
+                                        {{ app.user.nom }} {{ app.user.prenom }} - {% block roleUtilisateur %}{% endblock %}
+                                        <a href="{{ path('deconnexion') }}" id="deconnexion"> Se deconnecter </a>
+                                    </div>
+                                </div>
+                            </div>
                         {% endblock %}
                     </div>
                     <div id="contenu">
