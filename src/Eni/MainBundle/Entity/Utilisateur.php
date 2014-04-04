@@ -3,6 +3,7 @@
 namespace Eni\MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User;
 
@@ -53,6 +54,7 @@ class Utilisateur extends User {
 	 */
 	public function __construct() {
 		parent::__construct();
+		$this->tests = new ArrayCollection();
 		$this->inscriptions = new ArrayCollection();
 	}
 
@@ -162,5 +164,31 @@ class Utilisateur extends User {
 
 	public function estStagiaire() {
 		return in_array('ROLE_STAGIAIRE', $this->getRoles());
+	}
+
+	/**
+	 * Add tests
+	 * @param Test $tests
+	 * @return Utilisateur
+	 */
+	public function addTest(Test $tests) {
+		$this->tests[] = $tests;
+		return $this;
+	}
+
+	/**
+	 * Remove tests
+	 * @param Test $tests
+	 */
+	public function removeTest(Test $tests) {
+		$this->tests->removeElement($tests);
+	}
+
+	/**
+	 * Get tests
+	 * @return Collection
+	 */
+	public function getTests() {
+		return $this->tests;
 	}
 }

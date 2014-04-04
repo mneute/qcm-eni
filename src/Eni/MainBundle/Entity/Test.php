@@ -200,4 +200,22 @@ class Test {
 	public function getSectionTests() {
 		return $this->sectionTests;
 	}
+
+	/**
+	 * Set utilisateur
+	 * @param Utilisateur $utilisateur
+	 * @return Test
+	 */
+	public function setUtilisateur(Utilisateur $utilisateur) {
+		$this->utilisateur = $utilisateur;
+		return $this;
+	}
+
+	/**
+	 * Get utilisateur
+	 * @return Utilisateur
+	 */
+	public function getUtilisateur() {
+		return $this->utilisateur;
+	}
 }
