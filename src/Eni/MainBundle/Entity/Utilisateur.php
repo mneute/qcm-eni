@@ -192,6 +192,6 @@ class Utilisateur extends User {
 	}
 
 	public function estStagiaire() {
-		return !($this->estFormateur() || $this->estAdministrateur());
+		return in_array('ROLE_STAGIAIRE', $this->getRoles());
 	}
 }
