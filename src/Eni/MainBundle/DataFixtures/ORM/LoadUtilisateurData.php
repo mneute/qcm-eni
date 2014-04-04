@@ -2,16 +2,16 @@
 
 namespace Eni\MainBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
 use Eni\MainBundle\Entity\Promotion;
 use Eni\MainBundle\Entity\Utilisateur;
 use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUtilisateurData implements FixtureInterface, ContainerAwareInterface {
+class LoadUtilisateurData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
 
 	/**
 	 * @var ContainerInterface
@@ -20,6 +20,10 @@ class LoadUtilisateurData implements FixtureInterface, ContainerAwareInterface {
 
 	public function setContainer(ContainerInterface $container = null) {
 		$this->oContainer = $container;
+	}
+
+	public function getOrder() {
+		return 3;
 	}
 
 	public function load(ObjectManager $oManager) {
@@ -64,26 +68,37 @@ class LoadUtilisateurData implements FixtureInterface, ContainerAwareInterface {
 				->setPlainPassword('jdupond')
 				->setNom('dupond')
 				->setPrenom('Jean')
+				->addRole('ROLE_STAGIAIRE')
 				->setEnabled(true);
 		$oUserManager->updateUser($oUtilisateur);
 
 		/**
 		 * STAGIAIRE AVEC PROMOTION
 		 */
-		$oPromotion = new Promotion();
-		$oPromotion->setLibelle('CDI8');
+		$tUtilisateurs = [
+			['username' => 'mneute', 'nom' => 'neute', 'prenom' => 'Morgan'],
+			['username' => 'ebertho', 'nom' => 'bertho', 'prenom' => 'Etienne'],
+			['username' => 'jmabilais', 'nom' => 'mabilais', 'prenom' => 'Jonathan'],
+			['username' => 'pvakala', 'nom' => 'vakala', 'prenom' => 'Pierre'],
+		];
 
-		$oUtilisateur = $oUserManager->createUser();
-		/* @var $oUtilisateur Utilisateur */
-		$oUtilisateur->setUsername('toto')
-				->setEmail('toto@email.fr')
-				->setPlainPassword('toto')
-				->setNom('to')
-				->setPrenom('To');
-		$oUtilisateur->setPromotion($oPromotion);
-		$oPromotion->addUtilisateur($oUtilisateur);
+		$oPromotion = $this->getReference('promotion-CDI8');
+		/* @var $oPromotion Promotion */
 
-		$oManager->persist($oPromotion);
-		$oUserManager->updateUser($oUtilisateur);
+		foreach ($tUtilisateurs as $tUtilisateur) {
+			$oUtilisateur = $oUserManager->createUser();
+			/* @var $tUtilisateur Utilisateur */
+			$oUtilisateur->setUsername($tUtilisateur['username'])
+					->setEmail($tUtilisateur['username'] . '@email.fr')
+					->setPlainPassword($tUtilisateur['username'])
+					->setNom($tUtilisateur['nom'])
+					->setPrenom($tUtilisateur['prenom'])
+					->addRole('ROLE_STAGIAIRE')
+					->setEnabled(true);
+			$oUtilisateur->setPromotion($oPromotion);
+			$oPromotion->addUtilisateur($oUtilisateur);
+
+			$oUserManager->updateUser($oUtilisateur);
+		}
 	}
 }

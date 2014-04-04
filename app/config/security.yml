@@ -3,9 +3,10 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_FORMATEUR:     ROLE_USER
-        ROLE_ADMIN:         [ROLE_USER, ROLE_FORMATEUR]
-        ROLE_SUPER_ADMIN:   [ROLE_USER, ROLE_FORMATEUR, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_STAGIAIRE:     ROLE_USER
+        ROLE_FORMATEUR:     [ROLE_USER, ROLE_STAGIAIRE]
+        ROLE_ADMIN:         [ROLE_USER, ROLE_FORMATEUR, ROLE_STAGIAIRE]
+        ROLE_SUPER_ADMIN:   [ROLE_USER, ROLE_FORMATEUR, ROLE_STAGIAIRE, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         fos_userbundle:

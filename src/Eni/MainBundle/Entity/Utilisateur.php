@@ -39,11 +39,7 @@ class Utilisateur extends User {
 	private $promotion;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="Test", inversedBy="utilisateurs")
-	 * @ORM\JoinTable(name="utilisateur_test",
-	 *      joinColumns={@ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")},
-	 *      inverseJoinColumns={@ORM\JoinColumn(name="test_id", referencedColumnName="id")}
-	 *      )
+	 * @ORM\OneToMany(targetEntity="Test", mappedBy="utilisateur", cascade={"persist"})
 	 */
 	private $tests;
 
@@ -57,7 +53,6 @@ class Utilisateur extends User {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->tests = new ArrayCollection();
 		$this->inscriptions = new ArrayCollection();
 	}
 
@@ -124,32 +119,6 @@ class Utilisateur extends User {
 	}
 
 	/**
-	 * Add tests
-	 * @param Test $tests
-	 * @return Utilisateur
-	 */
-	public function addTest(Test $tests) {
-		$this->tests[] = $tests;
-		return $this;
-	}
-
-	/**
-	 * Remove tests
-	 * @param Test $tests
-	 */
-	public function removeTest(Test $tests) {
-		$this->tests->removeElement($tests);
-	}
-
-	/**
-	 * Get tests
-	 * @return ArrayCollection
-	 */
-	public function getTests() {
-		return $this->tests;
-	}
-
-	/**
 	 * Add inscriptions
 	 * @param Inscription $inscriptions
 	 * @return Utilisateur
@@ -192,6 +161,6 @@ class Utilisateur extends User {
 	}
 
 	public function estStagiaire() {
-		return !($this->estFormateur() || $this->estAdministrateur());
+		return in_array('ROLE_STAGIAIRE', $this->getRoles());
 	}
 }
