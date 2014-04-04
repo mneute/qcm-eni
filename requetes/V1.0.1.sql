@@ -1,0 +1,4 @@
+ALTER TABLE test ADD utilisateur_id INT NOT NULL;
+ALTER TABLE test ADD CONSTRAINT FK_D87F7E0CFB88E14F FOREIGN KEY (utilisateur_id) REFERENCES utilisateur (id);
+CREATE INDEX IDX_D87F7E0CFB88E14F ON test (utilisateur_id);
+DROP TABLE utilisateur_test;

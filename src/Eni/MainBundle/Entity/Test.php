@@ -46,9 +46,10 @@ class Test {
 	private $seuil;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="Utilisateur", mappedBy="tests")
+	 * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"all"}, inversedBy="tests")
+	 * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=false)
 	 */
-	private $utilisateurs;
+	private $utilisateur;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="Inscription", mappedBy="test", cascade={"persist"})
@@ -64,7 +65,6 @@ class Test {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->utilisateurs = new ArrayCollection();
 		$this->inscriptions = new ArrayCollection();
 		$this->sectionTests = new ArrayCollection();
 	}
@@ -147,32 +147,6 @@ class Test {
 	 */
 	public function getSeuil() {
 		return $this->seuil;
-	}
-
-	/**
-	 * Add utilisateurs
-	 * @param Utilisateur $utilisateurs
-	 * @return Test
-	 */
-	public function addUtilisateur(Utilisateur $utilisateurs) {
-		$this->utilisateurs[] = $utilisateurs;
-		return $this;
-	}
-
-	/**
-	 * Remove utilisateurs
-	 * @param Utilisateur $utilisateurs
-	 */
-	public function removeUtilisateur(Utilisateur $utilisateurs) {
-		$this->utilisateurs->removeElement($utilisateurs);
-	}
-
-	/**
-	 * Get utilisateurs
-	 * @return ArrayCollection
-	 */
-	public function getUtilisateurs() {
-		return $this->utilisateurs;
 	}
 
 	/**
