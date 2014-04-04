@@ -1,13 +1,5 @@
 {% extends "MainBundle:Layout:layout.html.twig" %}
 
-{% block roleUtilisateur %}
-    {% if app.user.promotion %}
-        {{ app.user.promotion.libelle }}
-    {% else %}
-        Candidat libre
-    {% endif %}
-{% endblock %}
-
 {% block contenu %}
     <h4>Sélectionnez le test que vous souhaitez passer :</h4>
     <div class="list-group" class="row">

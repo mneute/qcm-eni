@@ -191,4 +191,20 @@ class Utilisateur extends User {
 	public function getTests() {
 		return $this->tests;
 	}
+
+	public function getStatus() {
+		if ($this->estAdministrateur()) {
+			return 'Administrateur';
+		} else if ($this->estFormateur()) {
+			return 'Formateur';
+		} else if ($this->estStagiaire()) {
+			if (is_null($this->getPromotion())) {
+				return 'Candidat libre';
+			} else {
+				return $this->getPromotion()->getLibelle();
+			}
+		} else {
+			return '';
+		}
+	}
 }

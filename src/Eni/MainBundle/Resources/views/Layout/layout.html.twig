@@ -34,7 +34,7 @@
                             <div class="row" id="bannierePerso">
                                 <div class="col-md-12">
                                     <div class="alert alert-success">
-                                        {{ app.user.nom }} {{ app.user.prenom }} - {% block roleUtilisateur %}{% endblock %}
+                                        {{ app.user.nom }} {{ app.user.prenom }} - {{ app.user.status }}
                                         <a href="{{ path('deconnexion') }}" id="deconnexion"> Se deconnecter </a>
                                     </div>
                                 </div>
