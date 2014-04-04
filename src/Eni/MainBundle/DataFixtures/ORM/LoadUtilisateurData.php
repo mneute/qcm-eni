@@ -23,7 +23,7 @@ class LoadUtilisateurData extends AbstractFixture implements OrderedFixtureInter
 	}
 
 	public function getOrder() {
-		return 3;
+		return 2;
 	}
 
 	public function load(ObjectManager $oManager) {
@@ -57,6 +57,7 @@ class LoadUtilisateurData extends AbstractFixture implements OrderedFixtureInter
 				->addRole('ROLE_FORMATEUR')
 				->setEnabled(true);
 		$oUserManager->updateUser($oUtilisateur);
+		$this->addReference('utilisateur-formateur', $oUtilisateur);
 
 		/**
 		 * STAGIAIRE
