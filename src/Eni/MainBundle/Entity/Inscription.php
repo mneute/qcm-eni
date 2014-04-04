@@ -46,13 +46,13 @@ class Inscription {
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"all"}, inversedBy="inscriptions")
-	 * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=false)
 	 */
 	private $utilisateur;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Test", cascade={"all"}, inversedBy="inscriptions")
-	 * @ORM\JoinColumn(name="test_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="test_id", referencedColumnName="id", nullable=false)
 	 */
 	private $test;
 
