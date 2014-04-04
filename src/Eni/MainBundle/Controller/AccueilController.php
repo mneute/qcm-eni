@@ -36,6 +36,20 @@ class AccueilController extends Controller {
 	 * @Template
 	 */
 	public function accueilStagiaireAction() {
-		return [];
+		$toTests = [];
+		if ($this->oUtilisateurConnecte->estFormateur() || $this->oUtilisateurConnecte->estAdministrateur()) {
+			$oTestRepository = $this->getDoctrine()->getManager()->getRepository('MainBundle:Test');
+			/* @var $oTestRepository \Eni\MainBundle\Entity\TestRepository */
+			$toTests = $oTestRepository->findAll();
+		} else if ($this->oUtilisateurConnecte->estStagiaire()) {
+			$toInscriptions = $this->oUtilisateurConnecte->getInscriptions();
+			foreach ($toInscriptions as $oInscription) {
+				/* @var $oInscription \Eni\MainBundle\Entity\Inscription */
+				$toTests[] = $oInscription->getTest();
+			}
+		} else {
+			throw new \Exception('Problème dans la BDD, l\'utilisateur n\'a aucun rôle');
+		}
+		return ['toTests' => $toTests];
 	}
 }
