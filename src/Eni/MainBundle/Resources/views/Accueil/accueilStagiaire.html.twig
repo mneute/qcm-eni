@@ -7,3 +7,40 @@
         Candidat libre
     {% endif %}
 {% endblock %}
+
+{% block contenu %}
+    <h4>Sélectionnez le test que vous souhaitez passer :</h4>
+    <div class="list-group" class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% if app.user.tests %}
+                {% for test in app.user.tests %}
+                    <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal">{{ test.libelle }}</a>
+                {% endfor %}
+            {% else %}
+                Aucun test à passer.
+                Merci de vous déconnecter.
+            {% endif %}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    {# Modal #}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    Vous êtes sur le point de commencer ce test. Confirmez-vous?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+                    <button type="button" class="btn btn-success">Oui</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
