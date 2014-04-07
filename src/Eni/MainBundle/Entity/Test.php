@@ -57,16 +57,16 @@ class Test {
 	private $inscriptions;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="SectionTest", mappedBy="test", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="ThemeTest", mappedBy="test", cascade={"persist"})
 	 */
-	private $sectionTests;
+	private $themeTests;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->inscriptions = new ArrayCollection();
-		$this->sectionTests = new ArrayCollection();
+		$this->themeTests = new ArrayCollection();
 	}
 
 	/**
@@ -176,29 +176,29 @@ class Test {
 	}
 
 	/**
-	 * Add sectionTests
-	 * @param SectionTest $sectionTests
+	 * Add themeTests
+	 * @param ThemeTest $themeTests
 	 * @return Test
 	 */
-	public function addSectionTest(SectionTest $sectionTests) {
-		$this->sectionTests[] = $sectionTests;
+	public function addThemeTest(ThemeTest $themeTests) {
+		$this->themeTests[] = $themeTests;
 		return $this;
 	}
 
 	/**
-	 * Remove sectionTests
-	 * @param SectionTest $sectionTests
+	 * Remove themeTests
+	 * @param ThemeTest $themeTests
 	 */
-	public function removeSectionTest(SectionTest $sectionTests) {
-		$this->sectionTests->removeElement($sectionTests);
+	public function removeThemeTest(ThemeTest $themeTests) {
+		$this->themeTests->removeElement($themeTests);
 	}
 
 	/**
-	 * Get sectionTests
+	 * Get themeTests
 	 * @return ArrayCollection
 	 */
-	public function getSectionTests() {
-		return $this->sectionTests;
+	public function getThemeTests() {
+		return $this->themeTests;
 	}
 
 	/**
