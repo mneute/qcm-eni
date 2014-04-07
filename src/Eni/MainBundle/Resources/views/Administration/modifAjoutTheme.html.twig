@@ -1,0 +1,16 @@
+{% extends "MainBundle:Layout:layout.html.twig" %}
+
+{% block contenu %}
+    {{ form_start(oForm) }}
+    {{ form_row(oForm.libelle) }}
+
+    <div class="row">
+        <div class="col-md-1">
+            <input type="submit" value="Valider" class="btn btn-primary"/>
+        </div>
+        <div class="col-md-1">
+            <a href="{{ path('themes') }}" class="btn btn-danger" role="button">Annuler</a>
+        </div>
+    </div>
+    {{ form_end(oForm) }}
+{% endblock %}

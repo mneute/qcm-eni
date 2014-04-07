@@ -1,0 +1,27 @@
+{% extends "MainBundle:Layout:layout.html.twig" %}
+
+{% block contenu %}
+    <table class="table table-bordered" id="listeThemes">
+        <thead>
+            <tr>
+                <th class="col-sm-2">Suppression</th>
+                <th class="col-sm-10">Libellé</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oTheme in toTheme %}
+                <tr>
+                    <td>
+                        <a href="#" title="Supprimer">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('modifAjoutTheme', {'id': oTheme.id}) }}" class="">{{ oTheme.libelle }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('modifAjoutTheme', {'id': -1}) }}" type="button" class="btn btn-primary">Ajouter</a>
+{% endblock %}

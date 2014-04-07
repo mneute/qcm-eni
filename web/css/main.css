@@ -61,3 +61,16 @@ body {
 #navBarFormateur li {
     border: grey solid thin;
 }
+
+/**
+ * Liste des thèmes
+ */
+#listeThemes {
+    margin-top: 20px;
+}
+#listeThemes tbody tr td:first-child {
+    text-align: center;
+}
+#listeThemes tbody tr td:first-child a {
+    color: red;
+}

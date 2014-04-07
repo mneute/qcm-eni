@@ -1,3 +1,5 @@
+{% import _self as self %}
+
 <!DOCTYPE html>
 {% spaceless %}
     <html>
@@ -45,12 +47,12 @@
                         {% block menu %}
                             {% if (app.user.estFormateur() or app.user.estAdministrateur()) %}
                                 <ul class="nav nav-tabs nav-justified" id="navBarFormateur">
-                                    <li><a href="{{ path('accueil-formateur') }}">Accueil</a></li>
-                                    <li><a href="#">Question</a></li>
-                                    <li><a href="#">Theme</a></li>
-                                    <li><a href="#">Test</a></li>
-                                    <li><a href="#">Inscription</a></li>
-                                    <li><a href="{{ path('accueil-stagiaire') }}">Accueil Stagiaire</a></li>
+                                    {{ self.menuItem(path('accueil-formateur'), 'Accueil') }}
+                                    {{ self.menuItem('#', 'Question') }}
+                                    {{ self.menuItem(path('themes'), 'Theme') }}
+                                    {{ self.menuItem('#', 'Test') }}
+                                    {{ self.menuItem('#', 'Inscription') }}
+                                    {{ self.menuItem(path('accueil-stagiaire'), 'Accueil Stagiaire') }}
                                 </ul>
                             {% endif %}
                         {% endblock %}
@@ -66,3 +68,7 @@
         </body>
     </html>
 {% endspaceless %}
+
+{% macro menuItem(url, libelle) %}
+    <li><a class="list-group-item {% if url == path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}active{% endif %}" href="{{ url }}">{{ libelle }}</a></li>
+{% endmacro %}
