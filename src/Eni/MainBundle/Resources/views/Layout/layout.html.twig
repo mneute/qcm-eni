@@ -42,9 +42,19 @@
                         {% endblock %}
                     </div>
                     <div id="contenu">
+                        {% block menu %}
+                            {% if (app.user.estFormateur() or app.user.estAdministrateur()) %}
+                                <ul class="nav nav-tabs nav-justified" id="navBarFormateur">
+                                    <li><a href="{{ path('accueil-formateur') }}">Accueil</a></li>
+                                    <li><a href="#">Question</a></li>
+                                    <li><a href="#">Theme</a></li>
+                                    <li><a href="#">Test</a></li>
+                                    <li><a href="#">Inscription</a></li>
+                                    <li><a href="{{ path('accueil-stagiaire') }}">Accueil Stagiaire</a></li>
+                                </ul>
+                            {% endif %}
+                        {% endblock %}
                         {% block contenu %}
-                            {% block menu %}
-                            {% endblock %}
                         {% endblock %}
                     </div>
                     <div id="footer">
