@@ -58,9 +58,6 @@ body {
 #deconnexion {
     float: right;
 }
-#navBarFormateur li {
-    border: grey solid thin;
-}
 
 /**
  * Liste des thèmes

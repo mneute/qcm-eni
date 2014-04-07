@@ -46,7 +46,7 @@
                     <div id="contenu">
                         {% block menu %}
                             {% if (app.user.estFormateur() or app.user.estAdministrateur()) %}
-                                <ul class="nav nav-tabs nav-justified" id="navBarFormateur">
+                                <ul class="nav nav-pills nav-justified" id="navBarFormateur">
                                     {{ self.menuItem(path('accueil-formateur'), 'Accueil') }}
                                     {{ self.menuItem('#', 'Question') }}
                                     {{ self.menuItem(path('themes'), 'Theme') }}
@@ -70,5 +70,5 @@
 {% endspaceless %}
 
 {% macro menuItem(url, libelle) %}
-    <li><a class="list-group-item {% if url == path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}active{% endif %}" href="{{ url }}">{{ libelle }}</a></li>
+    <li class="{% if url == path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}active{% endif %}"><a href="{{ url }}">{{ libelle }}</a></li>
 {% endmacro %}
