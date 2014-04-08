@@ -6,13 +6,15 @@ use Doctrine\ORM\EntityManager;
 use Eni\MainBundle\Entity\Theme;
 use Eni\MainBundle\Entity\ThemeRepository;
 use Eni\MainBundle\Form\Type\ThemeType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class AdministrationController extends Controller {
+class AdministrationThemeController extends Controller {
 
 	/**
 	 * @var EntityManager
@@ -25,7 +27,7 @@ class AdministrationController extends Controller {
 
 	/**
 	 * @Route("/themes", name="themes")
-	 * @Template("MainBundle:Administration:listeTheme.html.twig")
+	 * @Template
 	 */
 	public function listeThemeAction() {
 		$oThemeRepository = $this->getDoctrine()->getManager()->getRepository('MainBundle:Theme');
@@ -50,7 +52,7 @@ class AdministrationController extends Controller {
 			$oTheme = $this->oManager->getRepository('MainBundle:Theme')->findOneBy(['id' => $id]);
 			/* @var $oTheme Theme */
 			if (is_null($oTheme)) {
-				throw new HttpException(404, sprintf('le thème %d n\'existe pas', $id));
+				throw new HttpException(404, sprintf('Le thème %d n\'existe pas', $id));
 			}
 			$titre = "Modifier un thème";
 		}
@@ -66,6 +68,24 @@ class AdministrationController extends Controller {
 			}
 		}
 
-		return ['oForm' => $oForm->createView(), 'titre' => $titre];
+		// on arrive ici dans 2 cas : la requete est de type GET ou le formulaire contient des erreurs
+		return ['oForm' => $oForm->createView()];
+	}
+
+	/**
+	 * @Route("/themes/{id}/confirmation-suppression", name="confirmationSuppressionTheme", requirements={"id" = "\d+"})
+	 * @Method({"POST"})
+	 */
+	public function confirmationSuppressionThemeAction(Request $oRequest, Theme $oTheme) {
+		if ($oRequest->isXmlHttpRequest()) {
+			$tRetour = [
+				'success' => true,
+				'html' => $this->renderView('MainBundle:Modal:confirmationSuppressionTheme.html.twig', ['oTheme' => $oTheme])
+			];
+
+			return new JsonResponse($tRetour);
+		} else {
+			return $this->redirect($this->generateUrl('themes'));
+		}
 	}
 }

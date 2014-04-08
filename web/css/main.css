@@ -58,9 +58,6 @@ body {
 #deconnexion {
     float: right;
 }
-#navBarFormateur li {
-    border: grey solid thin;
-}
 
 /**
  * Liste des thèmes
@@ -68,9 +65,12 @@ body {
 #listeThemes {
     margin-top: 20px;
 }
-#listeThemes tbody tr td:first-child {
+.colSupprimerTheme {
     text-align: center;
 }
-#listeThemes tbody tr td:first-child a {
+.colSupprimerTheme a {
     color: red;
+}
+#btnAjouterTheme {
+    float: right;
 }
