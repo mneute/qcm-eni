@@ -1,5 +1,7 @@
 {% extends "MainBundle:Layout:layout.html.twig" %}
 
+{% block title %} {{ titre ~ ' - ' ~ parent() }} {% endblock %}
+
 {% block contenu %}
     <h2>{{ titre }}</h2>
     {{ form_start(oForm, {'class': 'form-horizontal'}) }}
