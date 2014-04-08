@@ -22,7 +22,7 @@ class ThemeTest {
 
 	/**
 	 * @var integer
-	 * @ORM\Column(name="nbQuestionsATirer", type="integer")
+	 * @ORM\Column(name="nb_questions_a_tirer", type="integer")
 	 */
 	private $nbQuestionsATirer;
 
