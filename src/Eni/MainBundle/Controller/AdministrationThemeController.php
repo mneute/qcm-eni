@@ -69,7 +69,7 @@ class AdministrationThemeController extends Controller {
 		}
 
 		// on arrive ici dans 2 cas : la requete est de type GET ou le formulaire contient des erreurs
-		return ['oForm' => $oForm->createView()];
+		return ['oForm' => $oForm->createView(), 'titre' => $titre];
 	}
 
 	/**
