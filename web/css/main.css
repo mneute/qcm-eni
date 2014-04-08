@@ -74,3 +74,6 @@ body {
 #btnAjouterTheme {
     float: right;
 }
+#btnValiderModifAjoutTheme {
+    margin-right: 10px;
+}
