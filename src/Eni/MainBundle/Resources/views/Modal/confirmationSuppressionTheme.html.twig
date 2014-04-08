@@ -14,6 +14,7 @@
 {% endblock %}
 
 {% block modal_footer %}
+    <input type="hidden" value="{{ oTheme.id }}" id="idThemeSuppression"/>
     <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
-    <a href="#" type="button" class="btn btn-success">Oui</a>
+    <button type="button" class="btn btn-success" id="btnValidationSuppressionTheme">Oui</button>
 {% endblock %}

@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * @Route("/themes")
+ */
 class AdministrationThemeController extends Controller {
 
 	/**
@@ -26,7 +29,7 @@ class AdministrationThemeController extends Controller {
 	}
 
 	/**
-	 * @Route("/themes", name="themes")
+	 * @Route("/", name="themes")
 	 * @Template
 	 */
 	public function listeThemeAction() {
@@ -37,7 +40,7 @@ class AdministrationThemeController extends Controller {
 	}
 
 	/**
-	 * @Route("/themes/{id}", name="modifAjoutTheme", requirements={"id" = "-?\d+"})
+	 * @Route("/{id}", name="modifAjoutTheme", requirements={"id" = "-?\d+"})
 	 * @Template
 	 */
 	public function modifAjoutThemeAction($id, Request $oRequest) {
@@ -73,7 +76,7 @@ class AdministrationThemeController extends Controller {
 	}
 
 	/**
-	 * @Route("/themes/{id}/confirmation-suppression", name="confirmationSuppressionTheme", requirements={"id" = "\d+"})
+	 * @Route("/{id}/confirmation-suppression", name="confirmationSuppressionTheme", requirements={"id" = "\d+"})
 	 * @Method({"POST"})
 	 */
 	public function confirmationSuppressionThemeAction(Request $oRequest, Theme $oTheme) {
@@ -84,6 +87,23 @@ class AdministrationThemeController extends Controller {
 			];
 
 			return new JsonResponse($tRetour);
+		} else {
+			return $this->redirect($this->generateUrl('themes'));
+		}
+	}
+
+	/**
+	 * @Route("/{id}/suppression", name="validationSuppressionTheme", requirements={"id" = "\d+"}, options={"expose"=true})
+	 * @Method({"POST"})
+	 */
+	public function validationSuppressionThemeAction(Request $oRequest, Theme $oTheme) {
+		if ($oRequest->isXmlHttpRequest()) {
+			$this->oManager->remove($oTheme);
+			$this->oManager->flush();
+			return new JsonResponse([
+				'success' => true,
+				'location' => $this->generateUrl('themes')
+			]);
 		} else {
 			return $this->redirect($this->generateUrl('themes'));
 		}
