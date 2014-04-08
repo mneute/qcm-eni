@@ -1,3 +1,5 @@
+{% import _self as self %}
+
 <!DOCTYPE html>
 {% spaceless %}
     <html>
@@ -19,24 +21,54 @@
             {% endblock %}
         </head>
         <body>
-            {% block body %}
-                <div id="banniere">
-                    {% block banniere %}
-                        <div class="col-md-2">
-                            <img src="{{ asset('images/logoENI.jpg') }}" alt="logo ENI" width="100" height="100"/>
-                        </div>
-                        <div class="col-md-10" id="titreBanniere">
-                            <h1> Eni QCM </h1>
-                        </div>
-                    {% endblock %}
-                </div>
-                <div id="contenu">
-                {% block contenu %}{% endblock %}
+            <div id="body" class="container">
+                {% block body %}
+                    <div id="banniere">
+                        {% block banniere %}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="{{ asset('images/logoENI.jpg') }}" alt="logo ENI" width="100" height="100"/>
+                                </div>
+                                <div class="col-md-10" id="titreBanniere">
+                                    <h1> Eni QCM </h1>
+                                </div>
+                            </div>
+                            <div class="row" id="bannierePerso">
+                                <div class="col-md-12">
+                                    <div class="alert alert-success">
+                                        {{ app.user.nom }} {{ app.user.prenom }} - {{ app.user.status }}
+                                        <a href="{{ path('deconnexion') }}" id="deconnexion"> Se deconnecter </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                    <div id="contenu">
+                        {% block menu %}
+                            {% if (app.user.estFormateur() or app.user.estAdministrateur()) %}
+                                <ul class="nav nav-pills nav-justified" id="navBarFormateur">
+                                    {{ self.menuItem(path('accueil-formateur'), 'Accueil') }}
+                                    {{ self.menuItem('#', 'Question') }}
+                                    {{ self.menuItem(path('themes'), 'Thème') }}
+                                    {{ self.menuItem('#', 'Test') }}
+                                    {{ self.menuItem('#', 'Inscription') }}
+                                    {{ self.menuItem(path('accueil-stagiaire'), 'Accueil Stagiaire') }}
+                                </ul>
+                            {% endif %}
+                        {% endblock %}
+                        {% block contenu %}
+                        {% endblock %}
+                    </div>
+                    <div id="footer">
+                        {% block footer %}
+                        {% endblock %}
+                    </div>
+                {% endblock %}
             </div>
-            <div id="footer">
-            {% block footer %}{% endblock %}
-        </div>
-    {% endblock %}
-</body>
-</html>
+        </body>
+    </html>
 {% endspaceless %}
+
+{% macro menuItem(url, libelle) %}
+    <li class="{% if url == path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}active{% endif %}"><a href="{{ url }}">{{ libelle }}</a></li>
+{% endmacro %}

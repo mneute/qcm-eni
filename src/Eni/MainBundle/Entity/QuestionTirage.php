@@ -28,7 +28,7 @@ class QuestionTirage {
 	private $estMarquee;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Inscription", cascade={"all"}, inversedBy="questionTirage")
+	 * @ORM\ManyToOne(targetEntity="Inscription", cascade={"all"}, inversedBy="questionTirages")
 	 * @ORM\JoinColumn(name="inscription_id", referencedColumnName="id", nullable=false)
 	 */
 	private $inscription;
@@ -126,26 +126,24 @@ class QuestionTirage {
 		return $this->reponsesDonnees;
 	}
 
-    /**
-     * Set question
-     *
-     * @param \Eni\MainBundle\Entity\Question $question
-     * @return QuestionTirage
-     */
-    public function setQuestion(\Eni\MainBundle\Entity\Question $question)
-    {
-        $this->question = $question;
+	/**
+	 * Set question
+	 *
+	 * @param \Eni\MainBundle\Entity\Question $question
+	 * @return QuestionTirage
+	 */
+	public function setQuestion(\Eni\MainBundle\Entity\Question $question) {
+		$this->question = $question;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get question
-     *
-     * @return \Eni\MainBundle\Entity\Question 
-     */
-    public function getQuestion()
-    {
-        return $this->question;
-    }
+	/**
+	 * Get question
+	 *
+	 * @return \Eni\MainBundle\Entity\Question
+	 */
+	public function getQuestion() {
+		return $this->question;
+	}
 }

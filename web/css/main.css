@@ -1,8 +1,19 @@
+/**
+ * Présentation générale
+ */
 body {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #eee;
+    padding: 0;
 }
+#body {
+    margin: 0 auto;
+    border: black thin solid;
+    box-shadow: grey 0px 0px 5px;
+    padding: 10px;
+}
+
+/**
+ * Formulaire de login
+ */
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -36,4 +47,33 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+/**
+ * Bannière
+ */
+#bannierePerso {
+    margin-top: 10px;
+}
+#deconnexion {
+    float: right;
+}
+
+/**
+ * Liste des thèmes
+ */
+#listeThemes {
+    margin-top: 20px;
+}
+.colSupprimerTheme {
+    text-align: center;
+}
+.colSupprimerTheme a {
+    color: red;
+}
+#btnAjouterTheme {
+    float: right;
+}
+#btnValiderModifAjoutTheme {
+    margin-right: 10px;
 }

@@ -1,1 +1,37 @@
 {% extends "MainBundle:Layout:layout.html.twig" %}
+
+{% block title %}Accueil Stagiaire - {{ parent() }}{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script src="{{ asset('js/accueilStagiaire.js') }}" type="text/javascript"></script> 
+{% endblock %}
+
+{% block contenu %}
+    <h4>Sélectionnez le test que vous souhaitez passer :</h4>
+    <div class="list-group" class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% if toTests %}
+                {% for test in toTests %}
+                    <a href="{{ path('confirmationLancementTest', {"id" : test.id}) }}" class="list-group-item lien-confirmation-lancement-test">{{ test.libelle }}</a>
+                {% endfor %}
+            {% else %}
+                Aucun test à passer.
+                Merci de vous déconnecter.
+            {% endif %}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    {# Modal #}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {# Contenu de la modal chargé en Ajax 
+                    ROUTE : /confirmationLancementTest/$id
+                #}
+            </div>
+        </div>
+    </div>
+{% endblock %}

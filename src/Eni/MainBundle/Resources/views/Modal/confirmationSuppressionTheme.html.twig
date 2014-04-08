@@ -1,0 +1,19 @@
+{% extends "MainBundle:Layout:layoutModal.html.twig" %}
+
+{% block modal_title %}
+    Confirmation de la suppresion du thème
+{% endblock %}
+
+{% block modal_body %}
+    <p>
+        Vous êtes sur le point de supprimer le theme <em>{{ oTheme.libelle }}</em>.
+    </p>
+    <p>
+        Êtes-vous sûr ?
+    </p>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+    <a href="#" type="button" class="btn btn-success">Oui</a>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace Eni\MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User;
 
@@ -39,11 +40,7 @@ class Utilisateur extends User {
 	private $promotion;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="Test", inversedBy="utilisateurs")
-	 * @ORM\JoinTable(name="utilisateur_test",
-	 *      joinColumns={@ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")},
-	 *      inverseJoinColumns={@ORM\JoinColumn(name="test_id", referencedColumnName="id")}
-	 *      )
+	 * @ORM\OneToMany(targetEntity="Test", mappedBy="utilisateur", cascade={"persist"})
 	 */
 	private $tests;
 
@@ -75,7 +72,7 @@ class Utilisateur extends User {
 	 * @return Utilisateur
 	 */
 	public function setNom($nom) {
-		$this->nom = $nom;
+		$this->nom = strtoupper($nom);
 		return $this;
 	}
 
@@ -124,32 +121,6 @@ class Utilisateur extends User {
 	}
 
 	/**
-	 * Add tests
-	 * @param Test $tests
-	 * @return Utilisateur
-	 */
-	public function addTest(Test $tests) {
-		$this->tests[] = $tests;
-		return $this;
-	}
-
-	/**
-	 * Remove tests
-	 * @param Test $tests
-	 */
-	public function removeTest(Test $tests) {
-		$this->tests->removeElement($tests);
-	}
-
-	/**
-	 * Get tests
-	 * @return ArrayCollection
-	 */
-	public function getTests() {
-		return $this->tests;
-	}
-
-	/**
 	 * Add inscriptions
 	 * @param Inscription $inscriptions
 	 * @return Utilisateur
@@ -192,6 +163,48 @@ class Utilisateur extends User {
 	}
 
 	public function estStagiaire() {
-		return !($this->estFormateur() || $this->estAdministrateur());
+		return in_array('ROLE_STAGIAIRE', $this->getRoles());
+	}
+
+	/**
+	 * Add tests
+	 * @param Test $tests
+	 * @return Utilisateur
+	 */
+	public function addTest(Test $tests) {
+		$this->tests[] = $tests;
+		return $this;
+	}
+
+	/**
+	 * Remove tests
+	 * @param Test $tests
+	 */
+	public function removeTest(Test $tests) {
+		$this->tests->removeElement($tests);
+	}
+
+	/**
+	 * Get tests
+	 * @return Collection
+	 */
+	public function getTests() {
+		return $this->tests;
+	}
+
+	public function getStatus() {
+		if ($this->estAdministrateur()) {
+			return 'Administrateur';
+		} else if ($this->estFormateur()) {
+			return 'Formateur';
+		} else if ($this->estStagiaire()) {
+			if (is_null($this->getPromotion())) {
+				return 'Candidat libre';
+			} else {
+				return $this->getPromotion()->getLibelle();
+			}
+		} else {
+			return '';
+		}
 	}
 }

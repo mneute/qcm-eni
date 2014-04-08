@@ -46,9 +46,10 @@ class Test {
 	private $seuil;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="Utilisateur", mappedBy="tests")
+	 * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"all"}, inversedBy="tests")
+	 * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=false)
 	 */
-	private $utilisateurs;
+	private $utilisateur;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="Inscription", mappedBy="test", cascade={"persist"})
@@ -56,17 +57,16 @@ class Test {
 	private $inscriptions;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="SectionTest", mappedBy="test", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="ThemeTest", mappedBy="test", cascade={"persist"})
 	 */
-	private $sectionTests;
+	private $themeTests;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->utilisateurs = new ArrayCollection();
 		$this->inscriptions = new ArrayCollection();
-		$this->sectionTests = new ArrayCollection();
+		$this->themeTests = new ArrayCollection();
 	}
 
 	/**
@@ -150,32 +150,6 @@ class Test {
 	}
 
 	/**
-	 * Add utilisateurs
-	 * @param Utilisateur $utilisateurs
-	 * @return Test
-	 */
-	public function addUtilisateur(Utilisateur $utilisateurs) {
-		$this->utilisateurs[] = $utilisateurs;
-		return $this;
-	}
-
-	/**
-	 * Remove utilisateurs
-	 * @param Utilisateur $utilisateurs
-	 */
-	public function removeUtilisateur(Utilisateur $utilisateurs) {
-		$this->utilisateurs->removeElement($utilisateurs);
-	}
-
-	/**
-	 * Get utilisateurs
-	 * @return ArrayCollection
-	 */
-	public function getUtilisateurs() {
-		return $this->utilisateurs;
-	}
-
-	/**
 	 * Add inscriptions
 	 * @param Inscription $inscriptions
 	 * @return Test
@@ -202,28 +176,46 @@ class Test {
 	}
 
 	/**
-	 * Add sectionTests
-	 * @param SectionTest $sectionTests
+	 * Add themeTests
+	 * @param ThemeTest $themeTests
 	 * @return Test
 	 */
-	public function addSectionTest(SectionTest $sectionTests) {
-		$this->sectionTests[] = $sectionTests;
+	public function addThemeTest(ThemeTest $themeTests) {
+		$this->themeTests[] = $themeTests;
 		return $this;
 	}
 
 	/**
-	 * Remove sectionTests
-	 * @param SectionTest $sectionTests
+	 * Remove themeTests
+	 * @param ThemeTest $themeTests
 	 */
-	public function removeSectionTest(SectionTest $sectionTests) {
-		$this->sectionTests->removeElement($sectionTests);
+	public function removeThemeTest(ThemeTest $themeTests) {
+		$this->themeTests->removeElement($themeTests);
 	}
 
 	/**
-	 * Get sectionTests
+	 * Get themeTests
 	 * @return ArrayCollection
 	 */
-	public function getSectionTests() {
-		return $this->sectionTests;
+	public function getThemeTests() {
+		return $this->themeTests;
+	}
+
+	/**
+	 * Set utilisateur
+	 * @param Utilisateur $utilisateur
+	 * @return Test
+	 */
+	public function setUtilisateur(Utilisateur $utilisateur) {
+		$this->utilisateur = $utilisateur;
+		return $this;
+	}
+
+	/**
+	 * Get utilisateur
+	 * @return Utilisateur
+	 */
+	public function getUtilisateur() {
+		return $this->utilisateur;
 	}
 }

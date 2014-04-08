@@ -5,12 +5,12 @@ namespace Eni\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SectionTest
+ * ThemeTest
  *
- * @ORM\Table(name="section_test")
- * @ORM\Entity(repositoryClass="SectionTestRepository")
+ * @ORM\Table(name="theme_test")
+ * @ORM\Entity(repositoryClass="ThemeTestRepository")
  */
-class SectionTest {
+class ThemeTest {
 
 	/**
 	 * @var integer
@@ -22,18 +22,18 @@ class SectionTest {
 
 	/**
 	 * @var integer
-	 * @ORM\Column(name="nbQuestionsATirer", type="integer")
+	 * @ORM\Column(name="nb_questions_a_tirer", type="integer")
 	 */
 	private $nbQuestionsATirer;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Theme", cascade={"all"}, inversedBy="sectionTests")
+	 * @ORM\ManyToOne(targetEntity="Theme", cascade={"all"}, inversedBy="themeTests")
 	 * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=false)
 	 */
 	private $theme;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Test", cascade={"all"}, inversedBy="sectionTests")
+	 * @ORM\ManyToOne(targetEntity="Test", cascade={"all"}, inversedBy="themeTests")
 	 * @ORM\JoinColumn(name="test_id", referencedColumnName="id", nullable=false)
 	 */
 	private $test;
@@ -49,7 +49,7 @@ class SectionTest {
 	/**
 	 * Set nbQuestionsATirer
 	 * @param integer $nbQuestionsATirer
-	 * @return SectionTest
+	 * @return ThemeTest
 	 */
 	public function setNbQuestionsATirer($nbQuestionsATirer) {
 		$this->nbQuestionsATirer = $nbQuestionsATirer;
@@ -67,7 +67,7 @@ class SectionTest {
 	/**
 	 * Set theme
 	 * @param Theme $theme
-	 * @return SectionTest
+	 * @return ThemeTest
 	 */
 	public function setTheme(Theme $theme) {
 		$this->theme = $theme;
@@ -85,7 +85,7 @@ class SectionTest {
 	/**
 	 * Set test
 	 * @param Test $test
-	 * @return SectionTest
+	 * @return ThemeTest
 	 */
 	public function setTest(Test $test) {
 		$this->test = $test;

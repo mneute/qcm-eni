@@ -2,10 +2,16 @@
 
 namespace Eni\MainBundle\Controller;
 
+use Eni\MainBundle\Entity\Inscription;
+use Eni\MainBundle\Entity\Test;
+use Eni\MainBundle\Entity\TestRepository;
 use Eni\MainBundle\Entity\Utilisateur;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class AccueilController extends Controller {
 
@@ -33,8 +39,37 @@ class AccueilController extends Controller {
 	/**
 	 * @Route("/")
 	 * @Route("/stagiaire", name="accueil-stagiaire")
+	 * @Template
 	 */
 	public function accueilStagiaireAction() {
-		return [];
+		$toTests = [];
+		if ($this->oUtilisateurConnecte->estFormateur() || $this->oUtilisateurConnecte->estAdministrateur()) {
+			$oTestRepository = $this->getDoctrine()->getManager()->getRepository('MainBundle:Test');
+			/* @var $oTestRepository TestRepository */
+			$toTests = $oTestRepository->findAll();
+		} else if ($this->oUtilisateurConnecte->estStagiaire()) {
+			$toInscriptions = $this->oUtilisateurConnecte->getInscriptions();
+			foreach ($toInscriptions as $oInscription) {
+				/* @var $oInscription Inscription */
+				$toTests[] = $oInscription->getTest();
+			}
+		} else {
+			throw new \Exception('Problème dans la BDD, l\'utilisateur n\'a aucun rôle');
+		}
+		return ['toTests' => $toTests];
+		//return new \Symfony\Component\HttpFoundation\Response($this->renderView('MainBundle:Accueil:accueilStagiaire.html.twig', ['toTests' => $toTests]));
+	}
+
+	/**
+	 * @Route("/confirmationLancementTest/{id}", name="confirmationLancementTest")
+	 * @Method({"POST"})
+	 */
+	public function confirmationLancementTestAction(Test $oTest, Request $oRequest) {
+		if ($oRequest->isXmlHttpRequest()) {
+			$html = $this->renderView('MainBundle:Modal:confirmationLancementTest.html.twig', ['oTest' => $oTest]);
+			return new JsonResponse(['html' => $html, 'success' => true]);
+		} else {
+			return $this->redirect($this->generateUrl("accueil-stagiaire"));
+		}
 	}
 }
