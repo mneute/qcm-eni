@@ -48,7 +48,7 @@
                             {% if (app.user.estFormateur() or app.user.estAdministrateur()) %}
                                 <ul class="nav nav-pills nav-justified" id="navBarFormateur">
                                     {{ self.menuItem(path('accueil-formateur'), 'Accueil') }}
-                                    {{ self.menuItem('#', 'Question') }}
+                                    {{ self.menuItem(path('questions'), 'Question') }}
                                     {{ self.menuItem(path('themes'), 'Thème') }}
                                     {{ self.menuItem('#', 'Test') }}
                                     {{ self.menuItem('#', 'Inscription') }}

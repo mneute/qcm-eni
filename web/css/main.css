@@ -77,3 +77,19 @@ body {
 #btnValiderModifAjoutTheme {
     margin-right: 10px;
 }
+
+/**
+ * Liste des questions
+ */
+#listeQuestions {
+    margin-top: 20px;
+}
+.colSupprimerQuestion {
+    text-align: center;
+}
+.colSupprimerQuestion a {
+    color: red;
+}
+#btnAjouterQuestion {
+    float: right;
+}

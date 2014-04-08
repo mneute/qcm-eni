@@ -1,0 +1,47 @@
+{% extends "MainBundle:Layout:layout.html.twig" %}
+
+{% block title %}Liste des questions - {{ parent() }}{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/listeQuestion.js') }}"></script>
+{% endblock %}
+
+{% block contenu %}
+    <table class="table table-bordered" id="listeQuestions">
+        <thead>
+            <tr>
+                <th class="col-sm-1">Suppression</th>
+                <th class="col-sm-9">Énoncé</th>
+                <th class="col-sm-2">Réponses proposées</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oQuestion in toQuestions %}
+                <tr>
+                    <td class="colSupprimerQuestion">
+                        <a href="{{ path('confirmationSuppressionQuestion', {'id': oQuestion.id} ) }}" title="Supprimer">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('modifAjoutQuestion', {'id': oQuestion.id}) }}">{{ oQuestion.enonce }}</a>
+                    </td>
+                    <td class="colReponsesProposees">
+                        {{ oQuestion.reponsesProposees|length }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('modifAjoutQuestion', {'id': -1}) }}" type="button" id="btnAjouterQuestion" class="btn btn-primary">Ajouter une nouvelle question</a>
+    
+    
+    {# Modal #}
+    <div class="modal fade" id="modalConfirmationSuppressionQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+{% endblock %}
