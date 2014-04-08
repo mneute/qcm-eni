@@ -40,9 +40,11 @@ class AdministrationController extends Controller {
 	 */
 	public function modifAjoutThemeAction($id, Request $oRequest) {
 		$oTheme = null;
+		$titre = '';
 		if ($id == -1) {
 			//ajout
 			$oTheme = new Theme();
+			$titre = "Ajouter un thème";
 		} else {
 			//modif
 			$oTheme = $this->oManager->getRepository('MainBundle:Theme')->findOneBy(['id' => $id]);
@@ -50,6 +52,7 @@ class AdministrationController extends Controller {
 			if (is_null($oTheme)) {
 				throw new HttpException(404, sprintf('le thème %d n\'existe pas', $id));
 			}
+			$titre = "Modifier un thème";
 		}
 		$oForm = $this->createForm(new ThemeType(), $oTheme);
 
@@ -63,6 +66,6 @@ class AdministrationController extends Controller {
 			}
 		}
 
-		return ['oForm' => $oForm->createView()];
+		return ['oForm' => $oForm->createView(), 'titre' => $titre];
 	}
 }
