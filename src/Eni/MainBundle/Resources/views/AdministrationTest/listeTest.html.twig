@@ -1,0 +1,55 @@
+{% extends "MainBundle:Layout:layout.html.twig" %}
+
+{% block title %}Liste des tests - {{ parent() }}{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/listeTest.js') }}"></script>
+{% endblock %}
+
+{% block contenu %}
+    <table class="table table-bordered" id="listeTests">
+        <thead>
+            <tr>
+                <th class="col-sm-1 colSupprimerTest">Suppression</th>
+                <th class="col-sm-5 colLibelleTest">Libellé</th>
+                <th class="col-sm-4 colCreateurTest">Créateur</th>
+                <th class="col-sm-1 colDureeTest">Durée</th>
+                <th class="col-sm-1 colSeuilTest">Seuil</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oTest in toTest %}
+                <tr>
+                    <td class="colSupprimerTest">
+                        <a href="{{ path('confirmationSuppressionTest', {'id': oTest.id} ) }}" title="Supprimer">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                    <td class="colLibelleTest">
+                        <a href="{{ path('modifAjoutTest', {'id': oTest.id}) }}">{{ oTest.libelle }}</a>
+                    </td>
+                    <td class="colCreateurTest">
+                        {{ oTest.utilisateur.nom }} {{ oTest.utilisateur.prenom }}
+                    </td>
+                    <td class="colDureeTest">
+                        {{ oTest.duree }}
+                    </td>
+                    <td class="colSeuilTest">
+                        {{ oTest.seuil }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('modifAjoutTest', {'id': -1}) }}" type="button" id="btnAjouterTest" class="btn btn-primary">Ajouter un nouveau thème</a>
+    
+    
+    {# Modal #}
+    <div class="modal fade" id="modalConfirmationSuppressionTest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+{% endblock %}

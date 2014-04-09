@@ -1,0 +1,20 @@
+{% extends "MainBundle:Layout:layoutModal.html.twig" %}
+
+{% block modal_title %}
+    Confirmation de la suppresion du test
+{% endblock %}
+
+{% block modal_body %}
+    <p>
+        Vous êtes sur le point de supprimer le test <em>{{ oTest.libelle }}</em>.
+    </p>
+    <p>
+        Êtes-vous sûr ?
+    </p>
+{% endblock %}
+
+{% block modal_footer %}
+    <input type="hidden" value="{{ oTest.id }}" id="idTestSuppression"/>
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+    <button type="button" class="btn btn-success" id="btnValidationSuppressionTest">Oui</button>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace Eni\MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,22 +43,28 @@ class Test {
 	/**
 	 * @var integer
 	 * @ORM\Column(name="seuil", type="integer")
+	 * @Assert\Range(
+	 *      min = 0,
+	 *      max = 100,
+	 *      minMessage = "La valeur minimale est de 0%.",
+	 *      maxMessage = "La valeur maximale est de 100%."
+	 * )
 	 */
 	private $seuil;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"all"}, inversedBy="tests")
+	 * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"persist"}, inversedBy="tests")
 	 * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=false)
 	 */
 	private $utilisateur;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Inscription", mappedBy="test", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="Inscription", mappedBy="test", cascade={"persist", "remove"})
 	 */
 	private $inscriptions;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="ThemeTest", mappedBy="test", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="ThemeTest", mappedBy="test", cascade={"persist", "remove"})
 	 */
 	private $themeTests;
 

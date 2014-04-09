@@ -50,6 +50,17 @@ body {
 }
 
 /**
+ * Formulaire de test
+ */
+.colSupprimerTest,
+.colLibelleTest,
+.colCreateurTest,
+.colDureeTest,
+.colSeuilTest {
+    text-align: center;
+}
+
+/**
  * Bannière
  */
 #bannierePerso {
@@ -75,6 +86,25 @@ body {
     float: right;
 }
 #btnValiderModifAjoutTheme {
+    margin-right: 10px;
+}
+
+/**
+ * Liste des tests
+ */
+#listeTests {
+    margin-top: 20px;
+}
+.colSupprimerTest {
+    text-align: center;
+}
+.colSupprimerTest a {
+    color: red;
+}
+#btnAjouterTest {
+    float: right;
+}
+#btnValiderModifAjoutTest {
     margin-right: 10px;
 }
 

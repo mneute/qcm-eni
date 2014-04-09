@@ -44,9 +44,9 @@ class LoadReponseProposeeData extends AbstractFixture implements OrderedFixtureI
 		/* @var $oQuestion2 Question */
 
 		$tReponsesProposees2 = [
-			['enonce' => 'VS refusera de compiler la dernière ligne de code', 'valide' => true],
+			['enonce' => 'VS refusera de compiler la dernière ligne de code', 'valide' => false],
 			['enonce' => ' La valeur de Res restera à True', 'valide' => false],
-			['enonce' => 'La valeur de Res sera False', 'valide' => false],
+			['enonce' => 'La valeur de Res sera False', 'valide' => true],
 			['enonce' => 'Res = 4', 'valide' => false],
 		];
 
@@ -68,8 +68,8 @@ class LoadReponseProposeeData extends AbstractFixture implements OrderedFixtureI
 		/* @var $oQuestion3 Question */
 
 		$tReponsesProposees3 = [
-			['enonce' => 'Un', 'valide' => true],
-			['enonce' => 'Deux', 'valide' => false],
+			['enonce' => 'Un', 'valide' => false],
+			['enonce' => 'Deux', 'valide' => true],
 			['enonce' => 'Trois', 'valide' => false],
 		];
 

@@ -1,0 +1,19 @@
+{% extends "MainBundle:Layout:layout.html.twig" %}
+
+{% block title %} {{ titre ~ ' - ' ~ parent() }} {% endblock %}
+
+{% block contenu %}
+    <h2>{{ titre }}</h2>
+    {{ form_start(oForm, {'attr': {'class': 'form-horizontal', 'role': 'form'} }) }}
+    {{ form_row(oForm.libelle) }}
+    {{ form_row(oForm.description) }}
+    {{ form_row(oForm.duree) }}
+    {{ form_row(oForm.seuil) }}
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <input type="submit" value="Valider" class="btn btn-primary" id="btnValiderModifAjoutTest"/>
+            <a href="{{ path('tests') }}" class="btn btn-danger" role="button">Annuler</a>
+        </div>
+    </div>
+    {{ form_end(oForm) }}
+{% endblock %}
