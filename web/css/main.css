@@ -123,3 +123,9 @@ body {
 #btnAjouterQuestion {
     float: right;
 }
+#btnAjouterReponseProposee {
+    float: right;
+}
+#btnValiderModifAjoutQuestion {
+    margin-right: 10px;
+}

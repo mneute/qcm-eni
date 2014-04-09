@@ -1,0 +1,48 @@
+{% extends "MainBundle:Layout:layout.html.twig" %}
+
+{% block title %}{{ titre ~ ' - ' ~ parent() }}{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/modifAjoutQuestion.js') }}"></script>
+{% endblock %}
+
+{% block contenu %}
+    <h1>{{ titre }}</h1>
+    {{ form_start(oForm, {'attr': {'class': 'form-horizontal', 'role': 'form'} }) }}
+    <fieldset>
+        <legend>
+            Question
+        </legend>
+        {{ form_row(oForm.theme) }}
+        {{ form_row(oForm.enonce) }}
+    </fieldset>
+
+    <fieldset id="reponsesProposees" data-prototype="{{ form_widget(oForm.reponsesProposees.vars.prototype)|e }}">
+        <legend>
+            Réponses proposées
+        </legend>
+        {% if oForm.reponsesProposees|length > 0 %}
+            {% for reponse in oForm.reponsesProposees %}
+                <div class="reponseProposee panel panel-default">
+                    <div class="panel-body">
+                        {{ form_row(reponse.enonce) }}
+                        {{ form_row(reponse.valide) }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% do oForm.reponsesProposees.setRendered %}
+        {% endif %}
+
+        <a href="#" id="btnAjouterReponseProposee" class="btn btn-primary btn-xs">Ajouter une proposition de réponse</a>
+    </fieldset>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <input type="submit" value="Valider" class="btn btn-primary" id="btnValiderModifAjoutQuestion"/>
+            <a href="{{ path('questions') }}" class="btn btn-danger" role="button">Annuler</a>
+        </div>
+    </div>
+    {{ form_end(oForm) }}
+{% endblock %}

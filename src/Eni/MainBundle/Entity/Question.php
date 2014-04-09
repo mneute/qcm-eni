@@ -34,7 +34,7 @@ class Question {
 	private $media;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="ReponseProposee", mappedBy="question", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="ReponseProposee", mappedBy="question", cascade={"persist", "remove"})
 	 */
 	private $reponsesProposees;
 
@@ -109,6 +109,7 @@ class Question {
 	 */
 	public function addReponsesProposee(ReponseProposee $reponsesProposees) {
 		$this->reponsesProposees[] = $reponsesProposees;
+		$reponsesProposees->setQuestion($this);
 
 		return $this;
 	}
