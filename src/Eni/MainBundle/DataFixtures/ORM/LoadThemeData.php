@@ -31,5 +31,10 @@ class LoadThemeData extends AbstractFixture implements OrderedFixtureInterface {
 		$oManager->persist($oTheme4);
 
 		$oManager->flush();
+
+		$this->addReference('theme1', $oTheme);
+		$this->addReference('theme2', $oTheme2);
+		$this->addReference('theme3', $oTheme3);
+		$this->addReference('theme4', $oTheme4);
 	}
 }
