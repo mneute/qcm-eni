@@ -1,0 +1,21 @@
+{% extends "MainBundle:Layout:layoutModal.html.twig" %}
+
+{% block modal_title %}
+    Confirmation de la suppresion d'une question
+{% endblock %}
+
+{% block modal_body %}
+    <p>
+        Vous êtes sur le point de supprimer la question <em>{{ oQuestion.enonce }}</em>.<br/>
+        Ceci supprimera aussi les réponses associées à celle-ci.
+    </p>
+    <p>
+        Êtes-vous sûr ?
+    </p>
+{% endblock %}
+
+{% block modal_footer %}
+    <input type="hidden" value="{{ oQuestion.id }}" id="idQuestionSuppression"/>
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+    <button type="button" class="btn btn-success" id="btnValidationSuppressionQuestion">Oui</button>
+{% endblock %}

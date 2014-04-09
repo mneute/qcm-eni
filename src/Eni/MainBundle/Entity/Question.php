@@ -39,12 +39,12 @@ class Question {
 	private $reponsesProposees;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="QuestionTirage", mappedBy="question", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="QuestionTirage", mappedBy="question", cascade={"persist", "remove"})
 	 */
 	private $questionTirages;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Theme", cascade={"all"}, inversedBy="questions")
+	 * @ORM\ManyToOne(targetEntity="Theme", cascade={"persist"}, inversedBy="questions")
 	 * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
 	 */
 	private $theme;

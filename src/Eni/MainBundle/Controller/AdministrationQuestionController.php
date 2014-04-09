@@ -6,9 +6,11 @@ use Doctrine\ORM\EntityManager;
 use Eni\MainBundle\Entity\Question;
 use Eni\MainBundle\Entity\QuestionRepository;
 use Eni\MainBundle\Form\Type\QuestionType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -90,6 +92,32 @@ class AdministrationQuestionController extends Controller {
 	 * @Route("/{id}/confirmation-suppression", name="confirmationSuppressionQuestion", requirements={"id" = "\d+"})
 	 */
 	public function confirmationSuppressionQuestionAction(Request $oRequest, Question $oQuestion) {
+		if ($oRequest->isXmlHttpRequest()) {
+			$tRetour = [
+				'success' => true,
+				'html' => $this->renderView('MainBundle:Modal:confirmationSuppressionQuestion.html.twig', ['oQuestion' => $oQuestion])
+			];
 
+			return new JsonResponse($tRetour);
+		} else {
+			return $this->redirect($this->generateUrl('themes'));
+		}
+	}
+
+	/**
+	 * @Route("/{id}/suppression", name="validationSuppressionQuestion", requirements={"id" = "\d+"}, options={"expose"=true})
+	 * @Method({"POST"})
+	 */
+	public function validationSuppressionThemeAction(Request $oRequest, Question $oQuestion) {
+		if ($oRequest->isXmlHttpRequest()) {
+			$this->oManager->remove($oQuestion);
+			$this->oManager->flush();
+			return new JsonResponse([
+				'success' => true,
+				'location' => $this->generateUrl('questions')
+			]);
+		} else {
+			return $this->redirect($this->generateUrl('questions'));
+		}
 	}
 }
