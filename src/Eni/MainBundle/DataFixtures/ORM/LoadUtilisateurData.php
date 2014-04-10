@@ -86,7 +86,7 @@ class LoadUtilisateurData extends AbstractFixture implements OrderedFixtureInter
 		$oPromotion = $this->getReference('promotion-CDI8');
 		/* @var $oPromotion Promotion */
 
-		foreach ($tUtilisateurs as $tUtilisateur) {
+		foreach ($tUtilisateurs as $key => $tUtilisateur) {
 			$oUtilisateur = $oUserManager->createUser();
 			/* @var $tUtilisateur Utilisateur */
 			$oUtilisateur->setUsername($tUtilisateur['username'])
@@ -98,7 +98,7 @@ class LoadUtilisateurData extends AbstractFixture implements OrderedFixtureInter
 					->setEnabled(true);
 			$oUtilisateur->setPromotion($oPromotion);
 			$oPromotion->addUtilisateur($oUtilisateur);
-
+			$this->addReference('utilisateur-' . $key, $oUtilisateur);
 			$oUserManager->updateUser($oUtilisateur);
 		}
 	}
