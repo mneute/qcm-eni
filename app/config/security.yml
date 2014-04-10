@@ -35,3 +35,4 @@ security:
 
     access_control:
         - { path: ^/connexion$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(theme|question|test)s, role: ROLE_FORMATEUR }
