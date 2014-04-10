@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * @Route("/themes")
+ * @Route("/administration/themes")
  */
 class AdministrationThemeController extends Controller {
 

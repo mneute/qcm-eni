@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * @Route("/tests")
+ * @Route("/administration/tests")
  */
 class AdministrationTestController extends Controller {
 
