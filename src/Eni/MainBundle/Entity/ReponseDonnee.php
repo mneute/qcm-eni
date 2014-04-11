@@ -48,7 +48,7 @@ class ReponseDonnee {
 	 * @param \Eni\MainBundle\Entity\QuestionDonnee $questionTirage
 	 * @return reponseDonnee
 	 */
-	public function setQuestionTirage(\Eni\MainBundle\Entity\QuestionDonnee $questionTirage) {
+	public function setQuestionTirage(QuestionTirage $questionTirage) {
 		$this->questionTirage = $questionTirage;
 
 		return $this;
@@ -57,7 +57,7 @@ class ReponseDonnee {
 	/**
 	 * Get questionTirage
 	 *
-	 * @return \Eni\MainBundle\Entity\QuestionDonnee
+	 * @return QuestionTirage
 	 */
 	public function getQuestionTirage() {
 		return $this->questionTirage;
@@ -66,10 +66,10 @@ class ReponseDonnee {
 	/**
 	 * Set reponseProposee
 	 *
-	 * @param \Eni\MainBundle\Entity\ReponseProposee $reponseProposee
+	 * @param ReponseProposee $reponseProposee
 	 * @return ReponseDonnee
 	 */
-	public function setReponseProposee(\Eni\MainBundle\Entity\ReponseProposee $reponseProposee) {
+	public function setReponseProposee(ReponseProposee $reponseProposee) {
 		$this->reponseProposee = $reponseProposee;
 
 		return $this;
@@ -78,7 +78,7 @@ class ReponseDonnee {
 	/**
 	 * Get reponseProposee
 	 *
-	 * @return \Eni\MainBundle\Entity\ReponseProposee
+	 * @return ReponseProposee
 	 */
 	public function getReponseProposee() {
 		return $this->reponseProposee;

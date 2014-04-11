@@ -4,8 +4,8 @@ namespace Eni\MainBundle\Listener;
 
 use Eni\MainBundle\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -24,11 +24,11 @@ class LoginListener {
 	private $oRouter;
 
 	/**
-	 * @var TraceableEventDispatcher
+	 * @var EventDispatcherInterface
 	 */
 	private $oEventDispatcher;
 
-	public function __construct(SecurityContext $oSecurityContext, Router $oRouter, TraceableEventDispatcher $oEventDispatcher) {
+	public function __construct(SecurityContext $oSecurityContext, Router $oRouter, EventDispatcherInterface $oEventDispatcher) {
 		$this->oSecurityContext = $oSecurityContext;
 		$this->oRouter = $oRouter;
 		$this->oEventDispatcher = $oEventDispatcher;
